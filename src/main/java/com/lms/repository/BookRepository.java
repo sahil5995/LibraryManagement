@@ -1,5 +1,6 @@
-package com.lms.entity;
+package com.lms.repository;
 
+import com.lms.entity.BookEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

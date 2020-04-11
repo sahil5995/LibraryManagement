@@ -2,7 +2,7 @@ package com.lms;
 
 
 import com.lms.entity.BookEntity;
-import com.lms.entity.BookRepository;
+import com.lms.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

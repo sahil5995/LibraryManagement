@@ -1,5 +1,6 @@
-package com.lms.entity;
+package com.lms.repository;
 
+import com.lms.entity.BookEntity;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,11 +15,13 @@ import java.util.List;
 public class BookRepositoryTest {
 
     @Autowired
-    BookRepository bookRepository;
+    private BookRepository bookRepository;
 
     @Test
     public void testGetAllBooks() {
-        Assert.assertEquals(((List<BookEntity>)bookRepository.findAll()).size(),4);
+        
+        //Assert
+        Assert.assertEquals(((List<BookEntity>) bookRepository.findAll()).size(), 4);
     }
 
 
