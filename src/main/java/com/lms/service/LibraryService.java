@@ -28,10 +28,15 @@ public class LibraryService {
         BookEntity entity = dataService.findBookById(Long.valueOf(bookId));
 
         if(!dataService.isBorrowLimitFull(Constants.USERNAME)){
-            dataService.addBookToUser(entity.getName());
-            entity.setQuantity(entity.getQuantity() - 1);
-            dataService.saveBook(entity);
-            return 1;
+            if(!dataService.isBookAlreadyBorrowed(Constants.USERNAME,entity.getName())) {
+                dataService.addBookToUser(entity.getName());
+                entity.setQuantity(entity.getQuantity() - 1);
+                dataService.saveBook(entity);
+                return 1;
+            }
+            else {
+                return 2;
+            }
         }
         else{
             return 0;

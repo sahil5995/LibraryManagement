@@ -42,6 +42,30 @@ public class UserBookRepositoryTest {
                 findAllByUsername(Constants.USERNAME).size(), 2);
     }
 
+    @Test
+    public void testIfBookAlreadyExistFalse() {
+
+        //Arrange and Act
+        UserBookEntity entity = userBookRepository.findByUsernameAndBooknameAndStatus
+                (Constants.USERNAME, "Scala", Constants.BORROWED);
+
+        //Assert
+        Assert.assertNull(entity);
+
+    }
+
+    @Test
+    public void testIfBookAlreadyExistSuccess() {
+
+        //Arrange and Act
+        UserBookEntity entity = userBookRepository.findByUsernameAndBooknameAndStatus
+                (Constants.USERNAME, "Java", Constants.BORROWED);
+
+        //Assert
+        Assert.assertNotNull(entity);
+
+    }
+
     private UserBookEntity getUserBookEntity(String bookname, String username, String status) {
         UserBookEntity entity1 = new UserBookEntity(bookname);
         entity1.setStatus(status);

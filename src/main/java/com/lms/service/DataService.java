@@ -20,7 +20,7 @@ public class DataService {
     private UserBookRepository userBookRepo;
 
     public List<BookEntity> getAllBooksFromDB() {
-        List<BookEntity> list = (List<BookEntity>) bookRepository.findAll();
+        List<BookEntity> list = bookRepository.findByQuantityGreaterThan(0);
         return list;
     }
 
@@ -33,6 +33,12 @@ public class DataService {
         List<UserBookEntity> list = userBookRepo.findByUsernameAndStatus(username, Constants.BORROWED);
         return list.size() == 2;
     }
+
+    public boolean isBookAlreadyBorrowed(String username, String bookname) {
+        UserBookEntity en = userBookRepo.findByUsernameAndBooknameAndStatus(username, bookname, Constants.BORROWED);
+        return (null != en);
+    }
+
 
     public BookEntity findBookById(Long id) {
         BookEntity entity = bookRepository.findOne(id);

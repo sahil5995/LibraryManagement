@@ -43,11 +43,12 @@ public class LibraryServiceTest {
     }
 
     @Test
-    public void testBorrowBookSuccess() {
+    public void testBorrowBookLimitNo() {
         //Arrange
         BookEntity bookEntity = new BookEntity("Java", 3);
         Mockito.when(dataService.findBookById(anyLong())).thenReturn(bookEntity);
         Mockito.when(dataService.isBorrowLimitFull(anyString())).thenReturn(false);
+        Mockito.when(dataService.isBookAlreadyBorrowed(anyString(),anyString())).thenReturn(false);
         doNothing().when(dataService).addBookToUser(any());
         doNothing().when(dataService).saveBook(any());
 
@@ -59,7 +60,7 @@ public class LibraryServiceTest {
     }
 
     @Test
-    public void testBorrowBookFail() {
+    public void testBorrowBookLimitYes() {
         //Arrange
         BookEntity bookEntity = new BookEntity("Java", 3);
         Mockito.when(dataService.findBookById(anyLong())).thenReturn(bookEntity);
@@ -71,6 +72,23 @@ public class LibraryServiceTest {
         //Assert
         assertEquals(result, 0);
     }
+
+
+    @Test
+    public void testBorrowBookAlreadyBorrowedYes() {
+        //Arrange
+        BookEntity bookEntity = new BookEntity("Java", 3);
+        Mockito.when(dataService.findBookById(anyLong())).thenReturn(bookEntity);
+        Mockito.when(dataService.isBorrowLimitFull(anyString())).thenReturn(false);
+        Mockito.when(dataService.isBookAlreadyBorrowed(anyString(),anyString())).thenReturn(true);
+
+        //Act
+        int result = libraryService.borrowBook("1");
+
+        //Assert
+        assertEquals(result, 2);
+    }
+
 
     @Test
     public void getUserBooksTest() {

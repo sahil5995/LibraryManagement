@@ -50,6 +50,9 @@ My Borrowed List<br>
         <c:when test="${status==0}">
             <span style="color: red; "> Borrowing limit is over.</span>
         </c:when>
+        <c:when test="${status==2}">
+            <span style="color: red; "> Book Already borrowed.</span>
+        </c:when>
     </c:choose>
     <br>
 <table border="1">
