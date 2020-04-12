@@ -4,7 +4,7 @@ import com.lms.entity.BookEntity;
 import com.lms.entity.UserBookEntity;
 import com.lms.repository.BookRepository;
 import com.lms.repository.UserBookRepository;
-import com.lms.utils.Constants;
+import com.lms.utils.Properties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,17 +25,17 @@ public class DataService {
     }
 
     public List<UserBookEntity> getUserBooksFromDB(String username) {
-        List<UserBookEntity> list = userBookRepo.findAllByUsername(username);
+        List<UserBookEntity> list = userBookRepo.findAllByUsernameAndStatus(username, Properties.BORROWED);
         return list;
     }
 
     public boolean isBorrowLimitFull(String username) {
-        List<UserBookEntity> list = userBookRepo.findByUsernameAndStatus(username, Constants.BORROWED);
+        List<UserBookEntity> list = userBookRepo.findByUsernameAndStatus(username, Properties.BORROWED);
         return list.size() == 2;
     }
 
     public boolean isBookAlreadyBorrowed(String username, String bookname) {
-        UserBookEntity en = userBookRepo.findByUsernameAndBooknameAndStatus(username, bookname, Constants.BORROWED);
+        UserBookEntity en = userBookRepo.findByUsernameAndBooknameAndStatus(username, bookname, Properties.BORROWED);
         return (null != en);
     }
 
@@ -45,15 +45,27 @@ public class DataService {
         return entity;
     }
 
-    public void saveBook(BookEntity entity) {
+    public void issueBookToUser(String bookname) {
+
+        UserBookEntity userBookEntity = userBookRepo.findByUsernameAndBookname(Properties.USERNAME, bookname);
+        if (userBookEntity == null) {
+            userBookEntity = new UserBookEntity(bookname);
+        }
+        userBookEntity.setUsername(Properties.USERNAME);
+        userBookEntity.setStatus(Properties.BORROWED);
+        userBookRepo.save(userBookEntity);
+    }
+
+    public void updateQuantityForBook(String bookname, int quantity) {
+        BookEntity entity = bookRepository.findByName(bookname);
+        entity.setQuantity(entity.getQuantity() + quantity);
         bookRepository.save(entity);
     }
 
-    public void addBookToUser(String bookname) {
-        UserBookEntity userBookEntity = new UserBookEntity(bookname);
-        userBookEntity.setUsername(Constants.USERNAME);
-        userBookEntity.setStatus(Constants.BORROWED);
-        userBookRepo.save(userBookEntity);
+    public void updateUserBookStatus(String username, String bookname) {
+        UserBookEntity ubEntity = userBookRepo.findByUsernameAndBookname(username, bookname);
+        ubEntity.setStatus(Properties.RETURNED);
+        userBookRepo.save(ubEntity);
     }
 
 }

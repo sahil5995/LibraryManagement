@@ -2,7 +2,7 @@ package com.lms.service;
 
 import com.lms.entity.BookEntity;
 import com.lms.entity.UserBookEntity;
-import com.lms.utils.Constants;
+import com.lms.utils.Properties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,21 +27,22 @@ public class LibraryService {
     public int borrowBook(String bookId) {
         BookEntity entity = dataService.findBookById(Long.valueOf(bookId));
 
-        if(!dataService.isBorrowLimitFull(Constants.USERNAME)){
-            if(!dataService.isBookAlreadyBorrowed(Constants.USERNAME,entity.getName())) {
-                dataService.addBookToUser(entity.getName());
-                entity.setQuantity(entity.getQuantity() - 1);
-                dataService.saveBook(entity);
+        if (!dataService.isBorrowLimitFull(Properties.USERNAME)) {
+            if (!dataService.isBookAlreadyBorrowed(Properties.USERNAME, entity.getName())) {
+                dataService.issueBookToUser(entity.getName());
+                dataService.updateQuantityForBook(entity.getName(),-1);
                 return 1;
-            }
-            else {
+            } else {
                 return 2;
             }
-        }
-        else{
+        } else {
             return 0;
         }
+    }
 
+    public void returnBook(String bookname) {
+        dataService.updateQuantityForBook(bookname,1);
+        dataService.updateUserBookStatus(Properties.USERNAME, bookname);
     }
 
 }

@@ -19,13 +19,12 @@ public class BookRepositoryTest {
 
     @Test
     public void testGetAllBooks() {
-
         //Assert
         Assert.assertEquals(((List<BookEntity>) bookRepository.findAll()).size(), 4);
     }
 
     @Test
-    public void testGetAllBooksWithQuantityGT0() {
+    public void testGetAllBooksWithQuantityGrtZero() {
         //Arrange
         BookEntity entity = new BookEntity("Scala", 0);
         bookRepository.save(entity);

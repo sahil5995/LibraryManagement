@@ -53,6 +53,9 @@ My Borrowed List<br>
         <c:when test="${status==2}">
             <span style="color: red; "> Book Already borrowed.</span>
         </c:when>
+        <c:when test="${status==3}">
+        <span style="color: red; ">Book Returned</span>
+        </c:when>
     </c:choose>
     <br>
 <table border="1">
@@ -63,7 +66,7 @@ My Borrowed List<br>
     <c:forEach items="${listUserBooks}" var="listItem">
     <tr>
         <td>${listItem.bookname}</td>
-        <td><a href="/borrow?id=${listItem.id}">Return</a> </td>
+        <td><a href="/return?bookname=${listItem.bookname}">Return</a> </td>
     </tr>
     </c:forEach>
 </table>

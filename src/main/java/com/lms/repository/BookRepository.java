@@ -11,4 +11,6 @@ public interface BookRepository extends CrudRepository<BookEntity, Long> {
 
     List<BookEntity> findByQuantityGreaterThan(int minimum);
 
+    BookEntity findByName(String bookname);
+
 }

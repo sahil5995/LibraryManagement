@@ -22,7 +22,7 @@ public class LibraryManagementApplication implements CommandLineRunner {
     public void run(String... strings) throws Exception {
         bookRepository.save(new BookEntity("Java",1));
         bookRepository.save(new BookEntity("Python",6));
-        bookRepository.save(new BookEntity("Perl",0));
+        bookRepository.save(new BookEntity("Perl",2));
         bookRepository.save(new BookEntity("PHP",8));
     }
 }
