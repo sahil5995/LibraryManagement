@@ -1,6 +1,8 @@
 package com.lms.controller;
 
 
+import com.lms.entity.BookEntity;
+import com.lms.entity.UserBookEntity;
 import com.lms.service.LibraryService;
 import com.lms.utils.Properties;
 import lombok.extern.slf4j.Slf4j;
@@ -23,15 +25,14 @@ public class LibraryController {
     private LibraryService service;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String showBooks() {
+    public String showWelcomePage() {
         return "Welcome";
     }
 
     @RequestMapping(value = "/books", method = RequestMethod.GET)
     public String showBooks(ModelMap model, @RequestParam(defaultValue = "100") String status) {
-        List listAllBooks = service.getAllBooks();
-        List listUserBooks = service.getUserBooks(Properties.USERNAME);
-
+        List<BookEntity> listAllBooks = service.getAllBooks();
+        List<UserBookEntity> listUserBooks = service.getUserBooks(Properties.USERNAME);
         model.put("listAllBooks", listAllBooks);
         model.put("listUserBooks", listUserBooks);
         model.put("status", status);

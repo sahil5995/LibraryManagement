@@ -18,8 +18,14 @@ public class LibraryManagementApplication implements CommandLineRunner {
         SpringApplication.run(LibraryManagementApplication.class, args);
     }
 
+
+    /**
+     * This method is inserting the dummy data for Library
+     *
+     * @param strings args
+     */
     @Override
-    public void run(String... strings) throws Exception {
+    public void run(String... strings) {
         bookRepository.save(new BookEntity("Java", 1));
         bookRepository.save(new BookEntity("Python", 6));
         bookRepository.save(new BookEntity("Perl", 2));

@@ -22,8 +22,7 @@ public class LibraryService {
      * @return List
      */
     public List<BookEntity> getAllBooks() {
-        List<BookEntity> list = dataService.getAllBooksFromDB();
-        return list;
+        return dataService.getAllBooksFromDB();
     }
 
     /**
@@ -33,8 +32,7 @@ public class LibraryService {
      * @return List of books
      */
     public List<UserBookEntity> getUserBooks(String username) {
-        List<UserBookEntity> list = dataService.getUserBooksFromDB(username);
-        return list;
+        return dataService.getUserBooksFromDB(username);
     }
 
     /**
@@ -63,7 +61,7 @@ public class LibraryService {
     }
 
     /**
-     * This method is used to return the book by user
+     * This method is used to return the book borrowed by user
      *
      * @param bookname bookname
      */

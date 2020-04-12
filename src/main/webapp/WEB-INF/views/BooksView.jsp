@@ -1,5 +1,3 @@
-<%@page import="java.util.List"%>
-<%@page import="java.util.Arrays"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -8,14 +6,14 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>First Web Application</title>
+<title>Library Management</title>
 </head>
-<body style="text-align: center">
+<body style="text-align: center;">
 <h2>Welcome to My Library.</h2><br>
 
 <c:choose>
     <c:when test="${listAllBooks.size()>0}">
-        Available books are: <br /><br />
+        <b>Available books are:</b> <br /><br />
         <table border="1" style="margin-left: auto;margin-right: auto">
             <thead>
             <td style="color: red">Name</td>
@@ -38,7 +36,7 @@
 </c:choose>
 
 <br><br><br>
-My Borrowed List<br><br>
+<b>My Borrowed List</b><br><br>
 
 <c:choose>
 <c:when test="${listUserBooks.size()>0}">

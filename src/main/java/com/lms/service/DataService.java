@@ -76,8 +76,7 @@ public class DataService {
      * @return BookEntity Object
      */
     public BookEntity findBookById(Long id) {
-        BookEntity entity = bookRepository.findOne(id);
-        return entity;
+        return bookRepository.findOne(id);
     }
 
     /**
