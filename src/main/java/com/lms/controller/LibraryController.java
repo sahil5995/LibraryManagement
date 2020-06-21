@@ -12,13 +12,14 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
 @Slf4j
-@Controller
+@RestController
 public class LibraryController {
 
     @Autowired
@@ -58,5 +59,7 @@ public class LibraryController {
             log.error(e.getMessage());
         }
     }
+
+
 
 }

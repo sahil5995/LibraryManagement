@@ -5,9 +5,7 @@ import com.lms.entity.UserBookEntity;
 import com.lms.utils.Properties;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
+import org.mockito.*;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
@@ -15,7 +13,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LibraryServiceTest {
@@ -25,6 +23,9 @@ public class LibraryServiceTest {
 
     @Mock
     private DataService dataService;
+
+    @Captor
+    private ArgumentCaptor<String> dataServiceArgument;
 
     @Test
     public void getAllBooksTest() {
@@ -107,5 +108,33 @@ public class LibraryServiceTest {
     private BookEntity getBookEntity(String bookname, int quantity) {
         return new BookEntity(bookname, quantity);
     }
+
+
+    @Test
+    public void addBooktest() {
+
+        String bookname = "DotNet";
+
+        Mockito.when(dataService.addNewBook(bookname)).thenReturn(8);
+
+
+        int status = libraryService.addNewBook(bookname);
+        assertEquals(8, status);
+        verify(dataService, atLeastOnce()).addNewBook(bookname);
+
+    }
+
+
+    @Test
+    public void checkErrorCase() {
+        String bookname = "DotNet";
+        Mockito.when(dataService.addNewBook(bookname)).thenReturn(0);
+
+        int status = libraryService.addNewBook(bookname);
+        assertEquals(0, status);
+        verify(dataService, atLeastOnce()).addNewBook(bookname);
+
+    }
+
 
 }

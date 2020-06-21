@@ -71,4 +71,8 @@ public class LibraryService {
         log.info("Book {} returned by user {}", bookname, Properties.USERNAME);
     }
 
+    public int addNewBook(String bookname) {
+       int status = dataService.addNewBook(bookname);
+        return status;
+    }
 }

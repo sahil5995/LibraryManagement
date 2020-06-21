@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: com.lms.service.DummyServiceTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.005 sec <<< FAILURE! - in com.lms.service.DummyServiceTest
+getNameTestTrue(com.lms.service.DummyServiceTest)  Time elapsed: 0.005 sec  <<< ERROR!
+java.lang.NullPointerException: null
+	at com.lms.service.DummyServiceTest.getNameTestTrue(DummyServiceTest.java:16)
+

@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Book;
 import java.util.List;
 
 @Slf4j
@@ -122,4 +123,14 @@ public class DataService {
         log.info("Status updated to {} for book {}", Properties.RETURNED, bookname);
     }
 
+
+    public int addNewBook(String bookname) throws IllegalArgumentException {
+        try {
+            BookEntity entity = new BookEntity(bookname, 1);
+            bookRepository.save(entity);
+            return 8;
+        }catch(Exception e){
+            return 0;
+        }
+    }
 }

@@ -37,5 +37,21 @@ public class BookRepositoryTest {
         Assert.assertFalse(exist);
     }
 
+    @Test
+    public void testAddNewBook() {
+        String bookname = "Java";
+        BookEntity entity = new BookEntity(bookname, 1);
+
+        BookEntity oldRecords = bookRepository.findByName(bookname);
+
+        oldRecords.setQuantity(oldRecords.getQuantity()+1);
+
+        bookRepository.save(oldRecords);
+
+        BookEntity resultEntity = bookRepository.findByName(bookname);
+
+        Assert.assertEquals(oldRecords.getQuantity(), resultEntity.getQuantity());
+
+    }
 
 }

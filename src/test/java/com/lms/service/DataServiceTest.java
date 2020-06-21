@@ -13,8 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.verify;
 
 @SpringBootTest
@@ -154,7 +153,7 @@ public class DataServiceTest {
     }
 
     @Test
-    public void testFindByID(){
+    public void testFindByID() {
         //Arrange
         BookEntity entity = getBookEntity();
         Mockito.when(bookRepository.findOne(anyLong())).thenReturn(entity);
@@ -175,5 +174,47 @@ public class DataServiceTest {
     private BookEntity getBookEntity() {
         return new BookEntity("Java", 3);
     }
+
+    @Test
+    public void addBookToDB() {
+
+        String bookname = "DotNet";
+
+        BookEntity entity = new BookEntity(bookname, 1);
+        // bookRepository.save(entity);
+
+        int status = dataService.addNewBook(bookname);
+        Assert.assertEquals(8, status);
+
+    }
+
+    @Test
+    public void checkNewBookAdded() {
+
+        String bookname = "DotNet";
+
+        BookEntity entity = new BookEntity(bookname, 1);
+        // bookRepository.save(entity);
+
+        int status = dataService.addNewBook(bookname);
+
+        verify(bookRepository).save(bookArgument.capture());
+
+        //Assert
+        Assert.assertEquals(bookArgument.getValue().getName(), bookname);
+
+
+    }
+
+    @Test
+    public void checkDBError() {
+        String bookname = "DotNet";
+        Mockito.when(bookRepository.save(any(BookEntity.class))).thenThrow(IllegalArgumentException.class);
+
+        int status = dataService.addNewBook(bookname);
+
+        Assert.assertEquals(0, status);
+    }
+
 
 }

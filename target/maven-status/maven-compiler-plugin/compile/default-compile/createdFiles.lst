@@ -1,0 +1,10 @@
+com\lms\entity\BookEntity.class
+com\lms\utils\Properties.class
+com\lms\entity\UserBookEntity.class
+com\lms\service\LibraryService.class
+com\lms\service\DataService.class
+com\lms\repository\BookRepository.class
+com\lms\repository\UserBookRepository.class
+com\lms\service\DummyService.class
+com\lms\controller\LibraryController.class
+com\lms\LibraryManagementApplication.class

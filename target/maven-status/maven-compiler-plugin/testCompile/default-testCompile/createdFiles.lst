@@ -1,0 +1,5 @@
+com\lms\repository\BookRepositoryTest.class
+com\lms\repository\UserBookRepositoryTest.class
+com\lms\service\DataServiceTest.class
+com\lms\service\DummyServiceTest.class
+com\lms\service\LibraryServiceTest.class
